@@ -20,7 +20,10 @@ Since the web content is small and transient, it is ok
   to mount a host directory to avoid the complexity of using a data
   volume (though it is still fine to do it that way)
 
-Mount a host volume in /tmp to hold the html and inages:
+Mount a host volume in /tmp to hold the html and images:
 
 docker run -d --name=weewx-webserver --restart=always -p 80:80 -v /tmp/httpdroot:/usr/local/apache2/htdocs httpd
 docker run -d --name=weewx-default --restart=always -v /tmp/httpdroot:/home/weewx/public_html mitct02/weewx
+
+docker run -d --name=weewx-webserver -p 80:80 -v /tmp/httpdroot:/usr/local/apache2/htdocs httpd
+docker run --rm --name=weewx-dev -it -v /tmp/httpdroot:/home/weewx/public_html mitct02/weewx
