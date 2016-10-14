@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Tom Mitchell <tom@tom.org>
 
-ENV VERSION=3.5.0
+ENV VERSION=3.6.1
 ENV HOME=/home/weewx
 
 RUN apt-get -y update
