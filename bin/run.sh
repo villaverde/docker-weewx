@@ -5,6 +5,6 @@ echo "using $CONF"
 
 cp -rv $HOME/conf/$CONF/* /home/weewx/
 
-CONF_FILE=/home/weewx/weewx.conf
+CONF_FILE=$HOME/weewx.conf
 
-while true; do echo 'Hit CTRL+C'; $HOME/bin/weewxd $CONF_FILE; sleep 10; done
+./bin/weewxd $CONF_FILE
