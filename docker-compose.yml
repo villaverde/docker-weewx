@@ -1,0 +1,17 @@
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: nginx:1.12-alpine
+    volumes:
+      - "/Users/tom/tmp/public_html:/usr/share/nginx/html"
+    restart: always
+    ports:
+      - "80:80"
+  weewx:
+    image: mitct02/weewx:3.7.1
+    volumes:
+      - "/Users/tom/tmp/public_html:/home/weewx/public_html"
+
+
+
