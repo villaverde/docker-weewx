@@ -4,6 +4,8 @@ clone the git repo:
 
 git clone https://github.com/mitct02/docker-weewx
 
+TL;DR - HTTP_PORT=80 docker-compose up
+
 Simple approach to customizing your instance:
 
 Config:

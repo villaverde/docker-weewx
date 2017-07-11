@@ -5,8 +5,8 @@ services:
     volumes:
       - public_html:/usr/share/nginx/html
     restart: always
-    ports:
-      - "80:80"
+    ports: # host:container
+      - "${HTTP_PORT}:80"
   weewx:
     image: mitct02/weewx:3.7.1
     volumes:
