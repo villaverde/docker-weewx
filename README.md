@@ -11,7 +11,7 @@ Simple approach to customizing your instance:
 Config:
 
 You can either edit the contents of ./conf/default directly or
-  put your own config(s) into any directory under ./config (e.g.)
+  put your own config(s) into a directory under ./config (e.g.)
   ./config/dev
   
   What you put in your own config can consist of skins, bin/user,

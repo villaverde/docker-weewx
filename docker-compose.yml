@@ -8,8 +8,14 @@ services:
     ports: # host:container
       - "${HTTP_PORT}:80"
   weewx:
-    image: mitct02/weewx:3.7.1
+    environment:
+      - CONF=${CONF}
+#      - HOSTDIR=${HOST_DIR}
+#    image: mitct02/weewx:3.7.1
+    image: weewx
     volumes:
       - public_html:/home/weewx/public_html
 volumes:
+#  - public_html:${HOST_DIR}
+#  public_html:/Users/tom/tmp/weewx
   public_html:
