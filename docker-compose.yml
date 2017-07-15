@@ -6,16 +6,16 @@ services:
       - public_html:/usr/share/nginx/html
     restart: always
     ports: # host:container
-      - "${HTTP_PORT}:80"
+      - "80:80"
   weewx:
     environment:
-      - CONF=${CONF}
-#      - HOSTDIR=${HOST_DIR}
-#    image: mitct02/weewx:3.7.1
-    image: weewx
+      - CONF=dev
+    image: mitct02/weewx:3.7.1
     volumes:
+    # public_html - shared with web service - def is in volumes: below
       - public_html:/home/weewx/public_html
+    # another option: local directory, so the db doesnt start from scratch
+      - /Users/tom/tmp/weewx/archive:/home/weewx/archive
+    restart: always
 volumes:
-#  - public_html:${HOST_DIR}
-#  public_html:/Users/tom/tmp/weewx
   public_html:
