@@ -20,9 +20,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # add all confs and extras to the install
 # based on CONF env, copy the dirs to the install using CMD cp
 
-# override this to run another configuration
+# override this env var to run another configuration
 ENV CONF default
 
+# The CONF env var should correspond to the name of a sub-dir under conf/
 ADD conf/ $HOME/conf/
 ADD bin/run.sh $HOME/
 RUN chmod 755 $HOME/run.sh
