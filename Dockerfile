@@ -6,10 +6,11 @@ ENV HOME=/home/weewx
 
 RUN apt-get -y update
 
+RUN apt-get install -y apt-utils
 RUN apt-get install -y sqlite3 curl \
 python-configobj python-cheetah python-imaging \
-python-serial python-usb python-mysqldb
-
+python-serial python-usb python-mysqldb python-pip python-dev rsync ssh
+RUN pip install pyephem
 # install weewx from source
 ADD dist/weewx-$VERSION /tmp/
 RUN cd /tmp && ./setup.py build && ./setup.py install --no-prompt
@@ -24,7 +25,13 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV CONF default
 
 # The CONF env var should correspond to the name of a sub-dir under conf/
-ADD conf/ $HOME/conf/
+# ssh keys for rsync
+
+RUN mkdir /root/.ssh
+ONBUILD ADD keys/* /root/.ssh/
+ONBUILD RUN chmod -R 600 /root/.ssh
+ONBUILD ADD conf/ $HOME/conf/
+
 ADD bin/run.sh $HOME/
 RUN chmod 755 $HOME/run.sh
 
