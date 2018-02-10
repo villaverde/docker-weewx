@@ -9,7 +9,7 @@ RUN apt-get -y update
 RUN apt-get install -y apt-utils
 RUN apt-get install -y sqlite3 curl \
 python-configobj python-cheetah python-imaging \
-python-serial python-usb python-mysqldb python-pip python-dev rsync ssh
+python-serial python-usb python-mysqldb python-pip python-dev rsync ssh git
 RUN pip install pyephem
 # install weewx from source
 ADD dist/weewx-$VERSION /tmp/
