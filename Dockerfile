@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Tom Mitchell <tom@tom.org>
 
-ENV VERSION=3.8.0
+ENV VERSION=3.8.2
 ENV HOME=/home/weewx
 
 RUN apt-get -y update
@@ -14,6 +14,7 @@ RUN pip install pyephem
 # install weewx from source
 ADD dist/weewx-$VERSION /tmp/
 RUN cd /tmp && ./setup.py build && ./setup.py install --no-prompt
+CMD rm -rf /tmp/*
 
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -28,9 +29,15 @@ ENV CONF default
 # ssh keys for rsync
 
 RUN mkdir /root/.ssh
+ADD conf/ $HOME/conf/
+RUN chmod -R 777 $HOME
+RUN chmod -R 600 /root/.ssh
+
 ONBUILD ADD keys/* /root/.ssh/
 ONBUILD RUN chmod -R 600 /root/.ssh
 ONBUILD ADD conf/ $HOME/conf/
+ONBUILD ADD skins/ $HOME/skins/
+ONBUILD ADD bin/ $HOME/bin/
 
 ADD bin/run.sh $HOME/
 RUN chmod 755 $HOME/run.sh
