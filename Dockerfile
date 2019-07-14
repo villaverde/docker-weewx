@@ -11,34 +11,11 @@ RUN apt-get install -y apt-utils
 # debian, ubuntu, mint, raspbian
 
 # for systems that do not have python 2 installed (for example, ubuntu 18.04 and later):
-RUN  apt-get install -y python
+RUN  apt-get install -y python python-pil python-configobj python-cheetah python-serial python-usb \
+mysql-client python-mysqldb ftp python-dev python-pip sqlite3 curl python-pip rsync ssh git
 
-# for all systems, you may have to install the python imaging library. try this first:
-RUN  apt-get install -y python-pil
-# if that doesn't work, try this:
-RUN  apt-get install -y python-imaging
-
-# other required packages:
-RUN  apt-get install -y python-configobj
-RUN  apt-get install -y python-cheetah
-
-# required if hardware is serial or USB:
-RUN  apt-get install -y python-serial
-RUN  apt-get install -y python-usb
-
-# required if using MySQL:
-RUN  apt-get install -y mysql-client
-RUN  apt-get install -y python-mysqldb
-
-# required if using FTP on Raspbian systems:
-RUN  apt-get install -y ftp
-
-# optional for extended almanac information:
-RUN  apt-get install -y python-dev
-RUN  apt-get install -y python-pip
 RUN  pip install pyephem
 
-RUN apt-get install -y sqlite3 curl python-pip python-dev rsync ssh git
 #RUN pip install pyephem
 # install weewx from source
 ADD dist/weewx-$VERSION /tmp/
