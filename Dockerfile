@@ -1,4 +1,6 @@
-FROM debian:jessie
+#FROM debian:jessie
+#FROM jgoerzen/debian-base-standard
+FROM jgoerzen/debian-base-security:buster
 MAINTAINER Tom Mitchell <tom@tom.org>
 
 ENV VERSION=3.9.1
@@ -11,10 +13,12 @@ RUN apt-get install -y apt-utils
 # debian, ubuntu, mint, raspbian
 
 # for systems that do not have python 2 installed (for example, ubuntu 18.04 and later):
-RUN  apt-get install -y python python-pil python-configobj python-cheetah python-serial python-usb \
-mysql-client python-mysqldb ftp python-dev python-pip sqlite3 curl python-pip rsync ssh git
+RUN apt-get install -y python python-pil python-configobj python-cheetah python-serial python-usb
+RUN apt-get install -y default-mysql-client python-mysqldb
+RUN apt-get install -y ftp python-dev python-pip python-setuptools
+RUN apt-get install -y sqlite3 curl python-pip rsync ssh git
 
-RUN  pip install pyephem
+RUN pip install pyephem
 
 #RUN pip install pyephem
 # install weewx from source
@@ -24,6 +28,7 @@ RUN cd /tmp && ./setup.py build && ./setup.py install --no-prompt
 
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
 # add all confs and extras to the install
 # based on CONF env, copy the dirs to the install using CMD cp

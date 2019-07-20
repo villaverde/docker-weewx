@@ -9,4 +9,4 @@ cp -rv $HOME/conf/$CONF/* /home/weewx/
 
 CONF_FILE=$HOME/weewx.conf
 
-./bin/weewxd $CONF_FILE
+./bin/weewxd $CONF_FILE > /dev/stdout 2>/dev/stderr
