@@ -1,9 +1,4 @@
-#FROM debian:jessie
-#FROM jgoerzen/debian-base-standard
-#FROM jgoerzen/debian-base-security:buster
 FROM phusion/baseimage:0.11
-
-MAINTAINER Tom Mitchell <tom@tom.org>
 
 ENV VERSION=3.9.2
 ENV HOME=/home/weewx
@@ -12,13 +7,16 @@ RUN apt-get -y update
 
 RUN apt-get install -y apt-utils
 
+ENV TZ=America/New_York
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # debian, ubuntu, mint, raspbian
 
 # for systems that do not have python 2 installed (for example, ubuntu 18.04 and later):
 RUN apt-get install -y python python-pil python-configobj python-cheetah python-serial python-usb
 RUN apt-get install -y default-mysql-client python-mysqldb
 RUN apt-get install -y ftp python-dev python-pip python-setuptools
-RUN apt-get install -y sqlite3 curl python-pip rsync ssh git
+RUN apt-get install -y sqlite3 curl python-pip rsync ssh tzdata
 
 RUN pip install pyephem
 
@@ -26,9 +24,6 @@ RUN pip install pyephem
 # install weewx from source
 ADD dist/weewx-$VERSION /tmp/
 RUN cd /tmp && ./setup.py build && ./setup.py install --no-prompt
-
-ENV TZ=America/New_York
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # add all confs and extras to the install
 # based on CONF env, copy the dirs to the install using CMD cp
