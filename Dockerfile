@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.11
 
-ENV VERSION=3.9.2
+ENV VERSION=4.0.0a9
 ENV HOME=/home/weewx
 
 RUN apt-get -y update
@@ -11,14 +11,16 @@ ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # debian, ubuntu, mint, raspbian
-
-# for systems that do not have python 2 installed (for example, ubuntu 18.04 and later):
-RUN apt-get install -y python python-pil python-configobj python-cheetah python-serial python-usb
-RUN apt-get install -y default-mysql-client python-mysqldb
-RUN apt-get install -y ftp python-dev python-pip python-setuptools
-RUN apt-get install -y sqlite3 curl python-pip rsync ssh tzdata
-
-RUN pip install pyephem
+# http://weewx.com/downloads/development_versions/weewx-4.0.0a9.tar.gz
+# for systems that do not have python 3 installed (for example, ubuntu 18.04 and later):
+RUN apt-get install -y python3 python3-pip python3-configobj python3-serial python3-mysqldb python3-usb
+RUN pip3 install Cheetah3 Pillow-PIL pyephem
+#RUN apt-get install -y python-pil python-configobj python-cheetah python-serial python-usb
+#RUN apt-get install -y default-mysql-client python-mysqldb
+#RUN apt-get install -y ftp python-dev python-pip python-setuptools
+#RUN apt-get install -y sqlite3 curl python-pip rsync ssh tzdata
+RUN ln -s /usr/bin/python3 /usr/bin/python
+#RUN pip install pyephem
 
 #RUN pip install pyephem
 # install weewx from source
