@@ -11,4 +11,4 @@ CONF_FILE=$HOME/weewx.conf
 
 cd $HOME
 
-./bin/weewxd $CONF_FILE > /dev/stdout 2>/dev/stderr
+./bin/weewxd $CONF_FILE > /dev/stdout
