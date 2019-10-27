@@ -16,7 +16,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get install -y python3 python3-pip python3-configobj python3-serial python3-mysqldb python3-usb
 RUN pip3 install Cheetah3 Pillow-PIL pyephem
 RUN apt-get install -y default-mysql-client
-RUN apt-get install -y sqlite3 curl rsync ssh tzdata wget
+RUN apt-get install -y sqlite3 curl rsync ssh tzdata wget gftp
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # install weewx from source
