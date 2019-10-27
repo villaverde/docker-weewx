@@ -36,6 +36,9 @@ ADD conf/ $HOME/conf/
 RUN chmod -R 777 $HOME
 RUN chmod -R 600 /root/.ssh
 
+RUN mkdir /home/weewx/tmp
+RUN mkdir /home/weewx/public_html
+
 ONBUILD ADD keys/* /root/.ssh/
 ONBUILD RUN chmod -R 600 /root/.ssh
 ONBUILD ADD conf/ $HOME/conf/
