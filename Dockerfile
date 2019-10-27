@@ -11,7 +11,6 @@ ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # debian, ubuntu, mint, raspbian
-# http://weewx.com/downloads/development_versions/weewx-4.0.0a9.tar.gz
 # for systems that do not have python 3 installed (for example, ubuntu 18.04 and later):
 RUN apt-get install -y python3 python3-pip python3-configobj python3-serial python3-mysqldb python3-usb
 RUN pip3 install Cheetah3 Pillow-PIL pyephem
@@ -40,7 +39,6 @@ RUN chmod -R 600 /root/.ssh
 ONBUILD ADD keys/* /root/.ssh/
 ONBUILD RUN chmod -R 600 /root/.ssh
 ONBUILD ADD conf/ $HOME/conf/
-ONBUILD ADD skins/ $HOME/skins/
 ONBUILD ADD bin/ $HOME/bin/
 
 RUN mkdir -p /etc/service/weewx
