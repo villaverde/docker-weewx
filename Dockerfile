@@ -51,5 +51,8 @@ RUN chmod 755 /etc/service/weewx/run
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ADD weewx-extensions.sh /tmp/weewx-extensions.sh
+RUN sh /tmp/weewx-extensions.sh /tmp/weewx-extensions.sh
+
 CMD ["/sbin/my_init"]
 
